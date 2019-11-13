@@ -1,0 +1,15 @@
+.user-details {
+  list-style: none;
+  padding-left: 0;
+
+  b {
+    padding-right: 10px;
+  }
+}
+
+.user-posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}

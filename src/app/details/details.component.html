@@ -1,0 +1,52 @@
+<div class="wrap" *ngIf="user">
+  <h1>User details</h1>
+
+  <ul class="user-details">
+    <li><b>User name: </b>
+      {{user.name}}
+    </li>
+    <li><b>Email:</b>
+      <a href="mailto:{{user.email}}">{{user.email}}</a>
+    </li>
+    <li><b>Address:</b>
+      {{user.address.street}}
+      {{user.address.suite}}
+      {{user.address.zipcode}}
+      {{user.address.city}}
+    </li>
+    <li><b>Phone number:</b>
+      <a href="tel:{{user.phone}}">{{user.phone}}</a>
+    </li>
+    <li><b>Company name:</b>
+      <a href="{{user.website}}">
+        {{user.company.name}}
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="wrap user-posts" *ngIf="commentsLoaded">
+  <h2>User posts</h2>
+
+  <button mat-raised-button color="primary" routerLink="/create-post-for-user/{{user.id}}">Add post</button>
+    <mat-table [dataSource]="postsArray">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Post ID</mat-header-cell>
+        <mat-cell *matCellDef="let post"> {{post.id}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Post title</mat-header-cell>
+        <mat-cell *matCellDef="let post">{{post.title}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="commentsCount">
+        <mat-header-cell *matHeaderCellDef>Number of comments</mat-header-cell>
+        <mat-cell *matCellDef="let post"> {{post.commentsCount}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="body">
+        <mat-header-cell *matHeaderCellDef> Short description</mat-header-cell>
+        <mat-cell *matCellDef="let post"> {{post.body | slice:0:50}} ...</mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="postsColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: postsColumns;"></mat-row>
+    </mat-table>
+  </div>
+

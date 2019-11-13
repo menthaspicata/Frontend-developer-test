@@ -1,0 +1,27 @@
+<div class="wrap">
+  <h1>Add a New post</h1>
+
+  <form [formGroup]="createPostForm" (ngSubmit)="onSubmit()" #postForm="ngForm">
+    <mat-form-field>
+      <input matInput placeholder="Post title" type="text" formControlName="title" required>
+      <mat-error *ngIf="createPostForm.controls['title'].invalid && (createPostForm.controls['title'].dirty || createPostForm.controls['title'].touched)"
+                 class="text-danger">
+        <div *ngIf="createPostForm.controls['title'].errors.required">Title must be non empty</div>
+      </mat-error>
+      <mat-error *ngIf="createPostForm.controls['title'].invalid && (createPostForm.controls['title'].dirty || createPostForm.controls['title'].touched)"
+                 class="text-danger">
+        <div *ngIf="createPostForm.controls['title'].errors.pattern">Title contains only letters or spaces</div>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput  placeholder="Post body" formControlName="body" required></textarea>
+      <mat-error *ngIf="createPostForm.controls['body'].invalid && (createPostForm.controls['body'].dirty || createPostForm.controls['body'].touched)"
+                 class="text-danger">
+        <div *ngIf="createPostForm.controls['body'].errors.required">Body must be non empty</div>
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">Publish</button>
+  </form>
+</div>
